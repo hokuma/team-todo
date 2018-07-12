@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Todo = ({todo}) => {
+const Todo = ({onClickEdit, todo}) => {
   return (
     <div>
       <label>
@@ -8,7 +8,7 @@ const Todo = ({todo}) => {
         <div>{todo.text}</div>
       </label>
       <section>
-        <button>編集</button>
+        <button onClick={onClickEdit}>編集</button>
         <button>x</button>
       </section>
       <section>

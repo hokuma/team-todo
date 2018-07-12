@@ -12,7 +12,7 @@ const TodoPane = () => {
       <section>
         <LabelSelector labels={labels}/>
       </section>
-      <TodoList todos={todos}/>
+      <TodoList labels={labels} todos={todos}/>
     </div>
   )
 };
