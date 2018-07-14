@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import LabelList from './LabelList';
 import LabelForm from './LabelForm';
 import Title from './Title';
-import { labels } from './sample';
+import { labels } from '../sample';
 
 const Layout = styled.div`
   padding: 5px;
