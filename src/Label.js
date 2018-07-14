@@ -1,8 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledLabel = styled.label`
+  cursor: ${props => props.onClick ? 'pointer' : 'default'};
+  background-color: #def;
+  border-radius: 5px;
+  padding: .5rem;
+`;
 
 const Label = ({label, onClick}) => {
   return (
-    <label onClick={onClick}>{label.text}</label>
+    <StyledLabel onClick={onClick}>{label.text}</StyledLabel>
   );
 };
 
