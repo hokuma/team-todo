@@ -1,4 +1,5 @@
 import React from 'react';
+import Label from './Label';
 
 const Todo = ({onClickEdit, todo}) => {
   return (
@@ -12,7 +13,7 @@ const Todo = ({onClickEdit, todo}) => {
         <button>x</button>
       </section>
       <section>
-        {todo.label ? <label>{todo.label.text}</label> : null}
+        {todo.label ? <Label label={todo.label}/> : null}
       </section>
     </div>
   );

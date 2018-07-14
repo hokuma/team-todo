@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LabelPane from './LabelPane';
 import TodoPane from './TodoPane';
 
 class App extends Component {
@@ -6,6 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <TodoPane/>
+        <LabelPane/>
       </div>
     );
   }
