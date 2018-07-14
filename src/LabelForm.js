@@ -1,4 +1,20 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import Button from './Button';
+
+const Container = styled.div`
+  margin-top: 10px;
+  display: flex;
+  align-items: stretch;
+`;
+
+export const LabelInput = styled.input.attrs({
+  placeholder: 'ラベルを入力してください'
+})`
+  font-size: .7em;
+  padding: .5em;
+  width: 145px;
+`;
 
 class LabelForm extends Component {
   constructor(props) {
@@ -23,10 +39,10 @@ class LabelForm extends Component {
 
   render() {
     return (
-      <div>
-        <input onChange={this.handleChangeText} value={this.state.text}/>
-        <button onClick={this.clickHandler}>追加</button>
-      </div>
+      <Container>
+        <LabelInput onChange={this.handleChangeText} value={this.state.text}/>
+        <Button onClick={this.clickHandler}>追加</Button>
+      </Container>
     )
   }
 }

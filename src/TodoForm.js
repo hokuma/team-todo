@@ -1,5 +1,28 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import LabelSelector from './LabelSelector';
+import Button from './Button';
+
+const Layout = styled.section`
+  margin: 10px 0;
+`;
+
+const OperationPanel = styled.div`
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  max-width: 250px;
+`;
+
+const TextForm = styled.textarea.attrs({
+  placeholder: 'TODOを入力してください'
+})`
+  box-sizing: border-box;
+  width: 250px;
+  height: 50px;
+  padding: 5px;
+  resize: vertical; 
+`;
 
 class TodoForm extends Component {
   constructor(props) {
@@ -41,17 +64,17 @@ class TodoForm extends Component {
   render() {
     const saveLabel = this.props.todo ? '更新' : '追加';
     return (
-      <div>
-        <textarea onChange={this.handleChangeText} value={this.state.text}></textarea>
-        <div>
+      <Layout>
+        <TextForm onChange={this.handleChangeText} value={this.state.text}/>
+        <OperationPanel>
           <LabelSelector labels={this.props.labels} onChange={this.handleChangeLabel} value={this.state.label}/>
-          <button onClick={this.clickSaveHandler}>{saveLabel}</button>
+          <Button onClick={this.clickSaveHandler}>{saveLabel}</Button>
           {
             this.props.todo ?
-              <button onClick={this.clickCancelHandler}>戻る</button> : null
+              <Button onClick={this.clickCancelHandler}>戻る</Button> : null
           }
-        </div>
-      </div>
+        </OperationPanel>
+      </Layout>
     );
   }
 }
