@@ -4,7 +4,7 @@ import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import Title from './Title';
 import LabelSelector from './LabelSelector';
-import { labels, todos } from '../sample';
+import { labels } from '../sample';
 
 const Layout = styled.div`
   padding: 5px;
@@ -30,7 +30,7 @@ const TodoPane = () => {
         <SubLabel>Filter</SubLabel><LabelSelector labels={labels}/>
       </HorizontalSection>
       <hr/>
-      <TodoList labels={labels} todos={todos}/>
+      <TodoList labels={labels} todos={[]}/>
     </Layout>
   )
 };

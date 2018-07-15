@@ -13,6 +13,10 @@ const Layout = styled.div`
 `;
 
 class App extends Component {
+  componentDidMount() {
+    this.props.actions.fetchTodos();
+  }
+
   render() {
     return (
       <Layout>
