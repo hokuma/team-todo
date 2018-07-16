@@ -21,7 +21,7 @@ const SubLabel = styled.label`
   margin-right: 3px;
 `;
 
-const TodoPane = () => {
+const TodoPane = (props) => {
   return (
     <Layout>
       <Title>Todo with Filter</Title>
@@ -30,7 +30,7 @@ const TodoPane = () => {
         <SubLabel>Filter</SubLabel><LabelSelector labels={labels}/>
       </HorizontalSection>
       <hr/>
-      <TodoList labels={labels} todos={[]}/>
+      <TodoList labels={labels} todos={props.todos}/>
     </Layout>
   )
 };

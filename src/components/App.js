@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import LabelPane from './LabelPane';
-import TodoPane from './TodoPane';
+import FilteredTodoPane from '../containers/FilteredTodoPane';
 
 const Layout = styled.div`
   font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
@@ -20,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <TodoPane/>
+        <FilteredTodoPane/>
         <LabelPane/>
       </Layout>
     );
