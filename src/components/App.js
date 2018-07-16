@@ -14,6 +14,7 @@ const Layout = styled.div`
 
 class App extends Component {
   componentDidMount() {
+    this.props.actions.fetchLabels();
     this.props.actions.fetchTodos();
   }
 

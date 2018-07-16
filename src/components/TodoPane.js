@@ -4,7 +4,6 @@ import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import Title from './Title';
 import LabelSelector from './LabelSelector';
-import { labels } from '../sample';
 
 const Layout = styled.div`
   padding: 5px;
@@ -25,12 +24,12 @@ const TodoPane = (props) => {
   return (
     <Layout>
       <Title>Todo with Filter</Title>
-      <TodoForm labels={labels}/>
+      <TodoForm labels={props.labels}/>
       <HorizontalSection>
-        <SubLabel>Filter</SubLabel><LabelSelector labels={labels}/>
+        <SubLabel>Filter</SubLabel><LabelSelector labels={props.labels}/>
       </HorizontalSection>
       <hr/>
-      <TodoList labels={labels} todos={props.todos}/>
+      <TodoList labels={props.labels} todos={props.todos}/>
     </Layout>
   )
 };

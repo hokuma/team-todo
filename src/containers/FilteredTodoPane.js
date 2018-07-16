@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import TodoPane from '../components/TodoPane';
 
 function mapStateToProps(state) {
-  const todos = state.todos;
+  const todos = state.todos.todos;
+  const labels = state.labels.labels;
   return {
+    labels: labels,
     todos: todos
   };
 }
