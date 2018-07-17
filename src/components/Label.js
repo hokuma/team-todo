@@ -14,12 +14,12 @@ const Label = ({label, onClick}) => {
   );
 };
 
-export const EditableLabel = ({label}) => {
+export const EditableLabel = ({label, onRequestUpdate}) => {
   const handleClick = () => {
     const updateLabel = window.prompt('Label更新', label.text);
     if(updateLabel) {
       const nextLabel = Object.assign({}, label, {text: updateLabel});
-      console.log(nextLabel);
+      onRequestUpdate(nextLabel);
     }
   };
 

@@ -18,11 +18,11 @@ const Item = styled.li`
   white-space: nowrap;
 `;
 
-const LabelList = ({labels}) => {
+const LabelList = ({labels, updateLabel}) => {
   return (
     <List>
       {
-        labels.map((label) => <Item key={label.id}><Label label={label}/></Item>)
+        labels.map((label) => <Item key={label.id}><Label label={label} onRequestUpdate={updateLabel}/></Item>)
       }
     </List>
   );

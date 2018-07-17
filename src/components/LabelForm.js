@@ -29,7 +29,9 @@ class LabelForm extends Component {
     if(this.state.text === '') {
       return ;
     }
-    console.log(this.state.text);
+    this.props.addLabel(
+      this.state.text
+    );
     this.setState({text: ''});
   }
 

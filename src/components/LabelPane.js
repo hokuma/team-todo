@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import LabelList from './LabelList';
 import LabelForm from './LabelForm';
 import Title from './Title';
-import { labels } from '../sample';
 
 const Layout = styled.div`
   padding: 5px;
@@ -11,12 +10,12 @@ const Layout = styled.div`
   border-radius: 5px;
 `;
 
-const LabelPane = () => {
+const LabelPane = ({actions, labels}) => {
   return (
     <Layout>
       <Title>Labels</Title>
-      <LabelForm/>
-      <LabelList labels={labels}/>
+      <LabelForm addLabel={actions.addLabel}/>
+      <LabelList labels={labels} updateLabel={actions.updateLabel}/>
     </Layout>
   );
 };

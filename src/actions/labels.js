@@ -6,6 +6,15 @@ export default createActions({
   LABELS: {
     INDEX: () => {
       return labels;
+    },
+    ADD: (text) => {
+      return {
+        id: labelId++,
+        text
+      };
+    },
+    UPDATE: (label) => {
+      return label;
     }
   }
 });

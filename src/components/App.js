@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import LabelPane from './LabelPane';
+import UserLabelPane from '../containers/UserLabelPane';
 import FilteredTodoPane from '../containers/FilteredTodoPane';
 
 const Layout = styled.div`
@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Layout>
         <FilteredTodoPane/>
-        <LabelPane/>
+        <UserLabelPane/>
       </Layout>
     );
   }
