@@ -46,11 +46,18 @@ class TodoForm extends Component {
   }
 
   clickSaveHandler(event) {
+    const {todo, onSave, onDone} = this.props;
+    const {text, label} = this.state;
     event.preventDefault();
-    console.log(this.state);
-    if(this.props.onDone) {
-      this.props.onDone();
+    if(this.state.text === '') {
+      return;
     }
+    const params = todo ? Object.assign({}, todo, {text, label: label || null}) : {text, label};
+    onSave(params);
+    if(onDone) {
+      onDone();
+    }
+    this.setState({text: ''});
   }
 
   handleChangeText(event) {

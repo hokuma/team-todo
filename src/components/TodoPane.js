@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TodoForm from './TodoForm';
+import CreateTodoForm from '../containers/CreateTodoForm';
 import TodoList from './TodoList';
 import Title from './Title';
 import LabelSelector from './LabelSelector';
@@ -20,16 +20,16 @@ const SubLabel = styled.label`
   margin-right: 3px;
 `;
 
-const TodoPane = (props) => {
+const TodoPane = ({selected, todos, labels, actions}) => {
   return (
     <Layout>
       <Title>Todo with Filter</Title>
-      <TodoForm labels={props.labels}/>
+      <CreateTodoForm/>
       <HorizontalSection>
-        <SubLabel>Filter</SubLabel><LabelSelector labels={props.labels}/>
+        <SubLabel>Filter</SubLabel><LabelSelector value={selected} onChange={actions.filterTodo} labels={labels}/>
       </HorizontalSection>
       <hr/>
-      <TodoList labels={props.labels} todos={props.todos}/>
+      <TodoList actions={actions} todos={todos}/>
     </Layout>
   )
 };

@@ -50,16 +50,24 @@ const ButtonSection = styled.section`
   right: 5px;
 `;
 
-const Todo = ({onClickEdit, todo}) => {
+const Todo = ({onClickEdit, onClickRemove, onToggle, todo}) => {
+  const changeHandler = () => {
+    onToggle(todo);
+  };
+
+  const removeHandler = () => {
+    onClickRemove(todo);
+  };
+
   return (
     <Layout>
       <Content>
-        <Checkbox type="checkbox" checked={todo.completed} />
+        <Checkbox onChange={changeHandler} type="checkbox" checked={todo.completed} />
         <Text completed={todo.completed}>{todo.text}</Text>
       </Content>
       <ButtonSection>
         <EditButton onClick={onClickEdit}>編集</EditButton>
-        <RemoveButton>x</RemoveButton>
+        <RemoveButton onClick={removeHandler}>x</RemoveButton>
       </ButtonSection>
       <LabelField>
         {todo.label ? <Label label={todo.label}/> : null}

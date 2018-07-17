@@ -14,11 +14,11 @@ const Item = styled.li`
   list-style: none;
 `;
 
-const TodoList = ({labels, todos}) => {
+const TodoList = ({actions, todos}) => {
   return (
     <ItemList>
       {todos.map((todo) => {
-        return <Item key={todo.id}><TodoItem labels={labels} todo={todo}/></Item>;
+        return <Item key={todo.id}><TodoItem actions={actions} todo={todo}/></Item>;
       })}
     </ItemList>
   );

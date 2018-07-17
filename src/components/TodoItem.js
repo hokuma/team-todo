@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
-import TodoForm from './TodoForm';
+import UpdateTodoForm from '../containers/UpdateTodoForm';
 
 class TodoItem extends Component {
   constructor(props) {
@@ -14,11 +14,11 @@ class TodoItem extends Component {
   }
 
   render() {
-    const {labels, todo} = this.props;
+    const {actions, todo} = this.props;
     if(this.state.edit) {
-      return <TodoForm labels={labels} onClickCancel={this.toggleEditMode} onDone={this.toggleEditMode}  todo={todo}/>;
+      return <UpdateTodoForm onClickCancel={this.toggleEditMode} onDone={this.toggleEditMode}  todo={todo}/>;
     } else {
-      return <Todo onClickEdit={this.toggleEditMode} todo={todo}/>;
+      return <Todo onClickEdit={this.toggleEditMode} onClickRemove={actions.removeTodo} onToggle={actions.toggleTodo} todo={todo}/>;
     }
   }
 }
