@@ -1,18 +1,20 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoForm from '../components/TodoForm';
-import todosActions from '../actions/todos';
+import { updateTodo, removeTodo } from '../actions/todos';
 
 function mapStateToProps(state) {
   return {
-    labels: state.labels.labels
-  }
+    labels: state.labels.labels,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    onSave: todosActions.todos.update
-  }, dispatch);
+  return bindActionCreators(
+    {
+      onSave: updateTodo,
+      onRemove: removeTodo,
+    }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm);

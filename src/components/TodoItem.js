@@ -10,15 +10,15 @@ class TodoItem extends Component {
   }
 
   toggleEditMode() {
-    this.setState({edit: !this.state.edit});
+    this.setState({ edit: !this.state.edit });
   }
 
   render() {
     const {actions, todo} = this.props;
     if(this.state.edit) {
-      return <UpdateTodoForm onClickCancel={this.toggleEditMode} onDone={this.toggleEditMode}  todo={todo}/>;
+      return <UpdateTodoForm onDone={this.toggleEditMode} onClickCancel={this.toggleEditMode} todo={todo}/>;
     } else {
-      return <Todo onClickEdit={this.toggleEditMode} onClickRemove={actions.removeTodo} onToggle={actions.toggleTodo} todo={todo}/>;
+      return <Todo onClickEdit={this.toggleEditMode} todo={todo} onToggle={actions.toggleTodo} onClickRemove={actions.removeTodo}/>;
     }
   }
 }

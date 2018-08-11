@@ -39,22 +39,19 @@ const Checkbox = styled.input.attrs({
 const EditButton = styled(Button)`
   font-size: .5em;
 `;
-
 const RemoveButton = styled(Button)`
   font-size: .5em;
 `;
-
 const ButtonSection = styled.section`
   position: absolute;
   top: 10px;
   right: 5px;
 `;
 
-const Todo = ({onClickEdit, onClickRemove, onToggle, todo}) => {
+const Todo = ({todo, onToggle, onClickRemove, onClickEdit}) => {
   const changeHandler = () => {
     onToggle(todo);
   };
-
   const removeHandler = () => {
     onClickRemove(todo);
   };
@@ -62,12 +59,12 @@ const Todo = ({onClickEdit, onClickRemove, onToggle, todo}) => {
   return (
     <Layout>
       <Content>
-        <Checkbox onChange={changeHandler} type="checkbox" checked={todo.completed} />
+        <Checkbox onChange={changeHandler} checked={todo.completed} />
         <Text completed={todo.completed}>{todo.text}</Text>
       </Content>
       <ButtonSection>
-        <EditButton onClick={onClickEdit}>編集</EditButton>
-        <RemoveButton onClick={removeHandler}>x</RemoveButton>
+        <EditButton onClick={onClickEdit}>{'編集'}</EditButton>
+        <RemoveButton onClick={removeHandler}>{'x'}</RemoveButton>
       </ButtonSection>
       <LabelField>
         {todo.label ? <Label label={todo.label}/> : null}

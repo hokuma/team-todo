@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from 'redux-actions'
 
 const defaultState = {
-  labels: []
+  labels: [],
 };
 
 const index = (state, {payload}) => Object.assign({}, state, {labels: payload});
@@ -10,7 +10,7 @@ const update = (state, {payload}) => Object.assign({}, state, {labels: updateLab
 
 const updateLabel = (payload, labels) => {
   return labels.reduce((acc, label) => {
-    if(label.id === payload.id) {
+    if (label.id === payload.id) {
       label = payload;
     }
     return acc.concat(label);
@@ -21,7 +21,7 @@ const reducer = handleActions({
   LABELS: {
     INDEX: index,
     ADD: add,
-    UPDATE: update
+    UPDATE: update,
   }
 }, defaultState);
 

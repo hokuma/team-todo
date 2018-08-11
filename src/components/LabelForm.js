@@ -27,10 +27,10 @@ class LabelForm extends Component {
   clickHandler(e) {
     e.preventDefault();
     if(this.state.text === '') {
-      return ;
+      return;
     }
     this.props.addLabel(
-      this.state.text
+      this.state.text,
     );
     this.setState({text: ''});
   }
@@ -42,10 +42,10 @@ class LabelForm extends Component {
   render() {
     return (
       <Container>
-        <LabelInput onChange={this.handleChangeText} value={this.state.text}/>
-        <Button onClick={this.clickHandler}>追加</Button>
+        <LabelInput value={this.state.text} onChange={this.handleChangeText}/>
+        <Button onClick={this.clickHandler}>{'追加'}</Button>
       </Container>
-    )
+    );
   }
 }
 

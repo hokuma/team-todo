@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import UserLabelPane from '../containers/UserLabelPane';
 import FilteredTodoPane from '../containers/FilteredTodoPane';
+import UserLabelPane from '../containers/UserLabelPane';
 
 const Layout = styled.div`
   font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
@@ -14,8 +14,8 @@ const Layout = styled.div`
 
 class App extends Component {
   componentDidMount() {
-    this.props.actions.fetchLabels();
     this.props.actions.fetchTodos();
+    this.props.actions.fetchLabels();
   }
 
   render() {

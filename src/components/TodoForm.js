@@ -29,57 +29,58 @@ class TodoForm extends Component {
     super(props);
     this.state = props.todo ? {
       text: props.todo.text,
-      label: props.todo.label
-    } : {
-      text: ''
+      label: props.todo.label,
+    }: {
+      text: '',
     };
 
-    this.clickCancelHandler = this.clickCancelHandler.bind(this);
     this.clickSaveHandler = this.clickSaveHandler.bind(this);
+    this.clickCancelHandler = this.clickCancelHandler.bind(this);
     this.handleChangeText = this.handleChangeText.bind(this);
     this.handleChangeLabel = this.handleChangeLabel.bind(this);
   }
 
-  clickCancelHandler(event) {
-    event.preventDefault();
-    this.props.onClickCancel();
-  }
-
-  clickSaveHandler(event) {
+  clickSaveHandler(e) {
     const {todo, onSave, onDone} = this.props;
     const {text, label} = this.state;
-    event.preventDefault();
+    e.preventDefault(); 
     if(this.state.text === '') {
       return;
     }
-    const params = todo ? Object.assign({}, todo, {text, label: label || null}) : {text, label};
+    const params = todo ? Object.assign(todo, {text, label: label || null}) : {text, label};
     onSave(params);
-    if(onDone) {
+    if(onDone){
       onDone();
     }
     this.setState({text: ''});
   }
 
-  handleChangeText(event) {
-    this.setState({text: event.target.value});
+  clickCancelHandler(e) {
+    e.preventDefault();
+    if(this.props.onClickCancel) {
+      this.props.onClickCancel();
+    }
   }
 
-  handleChangeLabel(label) {
-    this.setState({label});
+  handleChangeText(e) {
+    this.setState({text: e.target.value});
+  }
+
+  handleChangeLabel(val) {
+    this.setState({label: val});
   }
 
   render() {
-    const saveLabel = this.props.todo ? '更新' : '追加';
+    const saveLabel = this.props.todo ? '更新': '追加';
     return (
       <Layout>
-        <TextForm onChange={this.handleChangeText} value={this.state.text}/>
+        <TextForm value={this.state.text} onChange={this.handleChangeText}/>
         <OperationPanel>
-          <LabelSelector labels={this.props.labels} onChange={this.handleChangeLabel} value={this.state.label}/>
+          <LabelSelector value={this.state.label} onChange={this.handleChangeLabel} labels={this.props.labels}/>
           <Button onClick={this.clickSaveHandler}>{saveLabel}</Button>
-          {
-            this.props.todo ?
-              <Button onClick={this.clickCancelHandler}>戻る</Button> : null
-          }
+          { this.props.todo ?
+              <Button onClick={this.clickCancelHandler}>戻る</Button>
+              : null }
         </OperationPanel>
       </Layout>
     );

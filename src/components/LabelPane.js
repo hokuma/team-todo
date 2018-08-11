@@ -10,6 +10,7 @@ const Layout = styled.div`
   border-radius: 5px;
 `;
 
+
 const LabelPane = ({actions, labels}) => {
   return (
     <Layout>
