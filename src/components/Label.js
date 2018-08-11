@@ -18,7 +18,7 @@ export const EditableLabel = ({label, onRequestUpdate}) => {
   const handleClick = () => {
     const updateLabel = window.prompt('Label更新', label.text);
     if (updateLabel) {
-      const nextLabel = Object.assign({}, label, {text: updateLabel});
+      const nextLabel = label.set('text', updateLabel);
       onRequestUpdate(nextLabel);
     }
   };

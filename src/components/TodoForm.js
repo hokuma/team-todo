@@ -47,7 +47,7 @@ class TodoForm extends Component {
     if(this.state.text === '') {
       return;
     }
-    const params = todo ? Object.assign(todo, {text, label: label || null}) : {text, label};
+    const params = todo ? todo.set('text', text).set('label',label || null) : {text, label};
     onSave(params);
     if(onDone){
       onDone();

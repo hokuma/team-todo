@@ -1,15 +1,14 @@
 import { createActions } from 'redux-actions';
-import { normalize, schema } from 'normalizr';
+import { normalize } from 'normalizr';
+import { labelSchema } from '../models/label';
 import axios from 'axios';
 const host = 'http://localhost:3001';
 
-export const labelSchema = new schema.Entity('label');
-
 const actions = createActions({
   LABELS: {
-    INDEX:  (payload) => normalize(payload, [labelSchema]),
-    ADD:    (payload) => normalize(payload, labelSchema),
-    UPDATE: (payload) => normalize(payload, labelSchema),
+    INDEX:  (payload) => payload,
+    ADD:    (payload) => payload,
+    UPDATE: (payload) => payload,
   }
 });
 export default actions;
@@ -17,7 +16,10 @@ export default actions;
 export const fetchLabels = () => {
   return (dispatch) => {
     return axios.get(`${host}/labels`).then(
-      ({data}) => dispatch(actions.labels.index(data))
+      ({data}) => {
+        const payload = normalize(data, [labelSchema]);
+        dispatch(actions.labels.index(payload));
+      }
     );
   };
 };
@@ -25,7 +27,10 @@ export const fetchLabels = () => {
 export const addLabel = (text) => {
   return (dispatch) => {
     return axios.post(`${host}/labels`, {text}).then(
-      ({data}) => dispatch(actions.labels.add(data))
+      ({data}) => {
+        const payload = normalize(data, labelSchema);
+        dispatch(actions.labels.add(payload));
+      }
     );
   };
 };
@@ -33,7 +38,10 @@ export const addLabel = (text) => {
 export const updateLabel = (label) => {
   return (dispatch) => {
     return axios.put(`${host}/labels/${label.id}`, label).then(
-      ({data}) => dispatch(actions.labels.update(data))
+      ({data}) => {
+        const payload = normalize(data, labelSchema);
+        dispatch(actions.labels.update(payload));
+      }
     );
   };
 };

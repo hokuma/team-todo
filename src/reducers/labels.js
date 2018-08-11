@@ -1,11 +1,12 @@
 import { handleActions } from 'redux-actions'
+import { fromJS, List } from 'immutable';
 
-const defaultState = {
+const defaultState = fromJS({
   labels: [],
-};
+});
 
-const index = (state, {payload}) => Object.assign({}, state, {labels: payload.result});
-const add = (state, {payload}) => Object.assign({}, state, {labels: state.labels.concat(payload.result)});
+const index = (state, {payload}) => state.set('labels', List(payload.result));
+const add = (state, {payload}) => state.update('labels', (labels) => labels.concat(payload.result));
 
 const reducer = handleActions({
   LABELS: {

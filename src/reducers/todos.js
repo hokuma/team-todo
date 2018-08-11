@@ -1,14 +1,15 @@
 import { handleActions } from 'redux-actions'
+import { fromJS, List } from 'immutable';
 
-const defaultState = {
+const defaultState = fromJS({
   todos: [],
   filterLabelId: undefined,
-};
+});
 
-const index = (state, {payload}) => Object.assign({}, state, {todos: payload.result});
-const filter = (state, {payload}) => Object.assign({}, state, {filterLabelId: payload.filterLabelId});
-const add = (state, {payload}) => Object.assign({}, state, {todos: state.todos.concat(payload.result)});
-const remove = (state, {payload}) => Object.assign({}, state, {todos: state.todos.filter((todoId) => todoId !== payload.id)});
+const index = (state, {payload}) => state.set('todos', List(payload.result));
+const filter = (state, {payload}) => state.set('filterLabelId', payload.filterLabelId);
+const add = (state, {payload}) => state.update('todos', (todos) => todos.concat(payload.result));
+const remove = (state, {payload}) => state.update('todos', (todos) => todos.filter((todoId) => todoId !== payload.id));
 
 const reducer = handleActions({
   TODOS: {

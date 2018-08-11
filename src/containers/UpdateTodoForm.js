@@ -2,12 +2,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoForm from '../components/TodoForm';
 import { updateTodo, removeTodo } from '../actions/todos';
-import { denormalize } from 'normalizr';
-import { labelSchema } from '../actions/labels';
+import LabelModel from '../models/label';
 
 function mapStateToProps(state) {
   return {
-    labels: denormalize(state.labels.labels, [labelSchema], state.entities),
+    labels: LabelModel.denormalize(state.labels.get('labels'), state.entities),
   };
 }
 

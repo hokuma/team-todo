@@ -1,23 +1,17 @@
 import { createActions } from 'redux-actions';
-import { normalize, schema } from 'normalizr';
-import { labelSchema } from './labels'
+import { normalize } from 'normalizr';
+import { todoSchema } from '../models/todo';
 import axios from 'axios';
 const host = 'http://localhost:3001';
 
-export const todoSchema = new schema.Entity('todo', {
-  label: labelSchema,
-});
-
 const actions = createActions({
   TODOS: {
-    INDEX:  (payload) => normalize(payload, [todoSchema]),
-    ADD:    (payload) => normalize(payload, todoSchema),
-    UPDATE: (payload) => normalize(payload, todoSchema),
+    INDEX:  (payload) => payload,
+    ADD:    (payload) => payload,
+    UPDATE: (payload) => payload,
     REMOVE: (payload) => payload,
-    TOGGLE: (payload) => normalize(payload, todoSchema),
-    FILTER: (label) => {
-      return {filterLabelId: label && label.id};
-    },
+    TOGGLE: (payload) => payload,
+    FILTER: (label) => ({filterLabelId: label && label.id}),
   }
 });
 export default actions;
@@ -25,7 +19,10 @@ export default actions;
 export const fetchTodos = () => {
   return (dispatch) => {
     return axios.get(`${host}/todos`).then(
-      ({data}) => dispatch(actions.todos.index(data))
+      ({data}) => {
+        const payload = normalize(data, [todoSchema]);
+        dispatch(actions.todos.index(payload));
+      }
     );
   };
 };
@@ -33,7 +30,10 @@ export const fetchTodos = () => {
 export const addTodo = (params) => {
   return (dispatch) => {
     return axios.post(`${host}/todos`, params).then(
-      ({data}) => dispatch(actions.todos.add(data))
+      ({data}) => {
+        const payload = normalize(data, todoSchema);
+        dispatch(actions.todos.add(payload));
+      }
     );
   };
 };
@@ -41,7 +41,10 @@ export const addTodo = (params) => {
 export const updateTodo = (todo) => {
   return (dispatch) => {
     return axios.put(`${host}/todos/${todo.id}`, todo).then(
-      ({data}) => dispatch(actions.todos.update(data))
+      ({data}) => {
+        const payload = normalize(data, todoSchema);
+        dispatch(actions.todos.update(payload));
+      }
     );
   };
 };
@@ -55,10 +58,13 @@ export const removeTodo = (todo) => {
 };
 
 export const toggleTodo = (todo) => {
-  const params = Object.assign(todo, {completed: !todo.completed});
+  const params = todo.set('completed', !todo.completed);
   return (dispatch) => {
     return axios.put(`${host}/todos/${params.id}`, params).then(
-      ({data}) => dispatch(actions.todos.toggle(data))
+      ({data}) => {
+        const payload = normalize(data, todoSchema);
+        dispatch(actions.todos.toggle(payload));
+      }
     );
   };
 };

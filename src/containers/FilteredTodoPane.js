@@ -1,9 +1,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import todoActions, { addTodo, removeTodo, updateTodo, toggleTodo, todoSchema } from '../actions/todos';
+import todoActions, { addTodo, removeTodo, updateTodo, toggleTodo } from '../actions/todos';
 import TodoPane from '../components/TodoPane';
-import { denormalize } from 'normalizr';
-import { labelSchema } from '../actions/labels';
+import TodoModel from '../models/todo';
+import LabelModel from '../models/label';
 
 function filtererdTodos(todos, labelId) {
   if (!labelId) return todos;
@@ -11,9 +11,9 @@ function filtererdTodos(todos, labelId) {
 }
 
 function mapStateToProps(state) {
-  const todos = denormalize(state.todos.todos, [todoSchema], state.entities);
-  const labels = denormalize(state.labels.labels, [labelSchema], state.entities);
-  const filterLabelId = state.todos.filterLabelId;
+  const todos = TodoModel.denormalize(state.todos.get('todos'), state.entities);
+  const labels = LabelModel.denormalize(state.labels.get('labels'), state.entities);
+  const filterLabelId = state.todos.get('filterLabelId');
   return {
     todos: filtererdTodos(todos, filterLabelId),
     selected: labels.find((label) => label.id === filterLabelId),
