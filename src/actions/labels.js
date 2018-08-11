@@ -1,12 +1,15 @@
 import { createActions } from 'redux-actions';
+import { normalize, schema } from 'normalizr';
 import axios from 'axios';
 const host = 'http://localhost:3001';
 
+export const labelSchema = new schema.Entity('label');
+
 const actions = createActions({
   LABELS: {
-    INDEX:  (payload) => payload,
-    ADD:    (payload) => payload,
-    UPDATE: (payload) => payload,
+    INDEX:  (payload) => normalize(payload, [labelSchema]),
+    ADD:    (payload) => normalize(payload, labelSchema),
+    UPDATE: (payload) => normalize(payload, labelSchema),
   }
 });
 export default actions;

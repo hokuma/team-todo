@@ -1,7 +1,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import todoActions, { addTodo, removeTodo, updateTodo, toggleTodo } from '../actions/todos';
+import todoActions, { addTodo, removeTodo, updateTodo, toggleTodo, todoSchema } from '../actions/todos';
 import TodoPane from '../components/TodoPane';
+import { denormalize } from 'normalizr';
+import { labelSchema } from '../actions/labels';
 
 function filtererdTodos(todos, labelId) {
   if (!labelId) return todos;
@@ -9,12 +11,13 @@ function filtererdTodos(todos, labelId) {
 }
 
 function mapStateToProps(state) {
-  const todos = state.todos.todos;
+  const todos = denormalize(state.todos.todos, [todoSchema], state.entities);
+  const labels = denormalize(state.labels.labels, [labelSchema], state.entities);
   const filterLabelId = state.todos.filterLabelId;
   return {
     todos: filtererdTodos(todos, filterLabelId),
-    selected: state.labels.labels.find((label) => label.id === filterLabelId),
-    labels: state.labels.labels,
+    selected: labels.find((label) => label.id === filterLabelId),
+    labels,
   };
 }
 

@@ -1,14 +1,20 @@
 import { createActions } from 'redux-actions';
+import { normalize, schema } from 'normalizr';
+import { labelSchema } from './labels'
 import axios from 'axios';
 const host = 'http://localhost:3001';
 
+export const todoSchema = new schema.Entity('todo', {
+  label: labelSchema,
+});
+
 const actions = createActions({
   TODOS: {
-    INDEX:  (payload) => payload,
-    ADD:    (payload) => payload,
-    UPDATE: (payload) => payload,
+    INDEX:  (payload) => normalize(payload, [todoSchema]),
+    ADD:    (payload) => normalize(payload, todoSchema),
+    UPDATE: (payload) => normalize(payload, todoSchema),
     REMOVE: (payload) => payload,
-    TOGGLE: (payload) => payload,
+    TOGGLE: (payload) => normalize(payload, todoSchema),
     FILTER: (label) => {
       return {filterLabelId: label && label.id};
     },
